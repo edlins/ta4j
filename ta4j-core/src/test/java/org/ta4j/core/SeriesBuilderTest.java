@@ -33,7 +33,6 @@ import java.util.function.Function;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.ta4j.core.TestUtils.assertNumEquals;
-import static org.ta4j.core.TestUtils.assertNumClassEquals;
 
 public class SeriesBuilderTest extends AbstractIndicatorTest {
 
@@ -75,9 +74,9 @@ public class SeriesBuilderTest extends AbstractIndicatorTest {
         assertNumEquals(seriesB.numOf(12), BigDecimalNum.valueOf(12));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = ClassCastException.class)
     public void testWrongNumType(){
         TimeSeries series = seriesBuilder.withNumTypeOf(BigDecimalNum.class).build();
-        assertNumClassEquals(series.numOf(12), DoubleNum.valueOf(12));
+        assertEquals(series.numOf(12), DoubleNum.valueOf(12));
     }
 }

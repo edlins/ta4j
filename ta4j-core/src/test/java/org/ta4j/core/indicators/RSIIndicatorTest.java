@@ -39,7 +39,7 @@ import java.util.function.Function;
 
 import static org.ta4j.core.TestUtils.assertNumEquals;
 import static org.ta4j.core.TestUtils.assertNumMatches;
-import static org.ta4j.core.TestUtils.assertIndicatorEquals;
+import static org.ta4j.core.TestUtils.assertIndicatorMatches;
 
 public class RSIIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num> {
 
@@ -131,21 +131,30 @@ public class RSIIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
     }
 
     @Test
-    public void xlsTest() throws Exception {
+    public void xlsTestPass() throws Exception {
+        xlsTest(12);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void xlsTestFail() throws Exception {
+        xlsTest(13);
+    }
+
+    public void xlsTest(int precision) throws Exception {
         Indicator<Num> xlsClose = new ClosePriceIndicator(xls.getSeries());
         Indicator<Num> indicator;
 
         indicator = getIndicator(xlsClose, 1);
-        assertIndicatorEquals(xls.getIndicator(1), indicator);
-        assertNumEquals("100", indicator.getValue(indicator.getTimeSeries().getEndIndex()));
+        assertIndicatorMatches(xls.getIndicator(1), indicator, precision);
+        assertNumMatches("100", indicator.getValue(indicator.getTimeSeries().getEndIndex()), precision);
 
         indicator = getIndicator(xlsClose, 3);
-        assertIndicatorEquals(xls.getIndicator(3), indicator);
-        assertNumEquals("67.04537458239054018366892427448437610204731551106392023415107574", indicator.getValue(indicator.getTimeSeries().getEndIndex()));
+        assertIndicatorMatches(xls.getIndicator(3), indicator, precision);
+        assertNumMatches("67.04537458239054018366892427448437610204731551106392023415107574", indicator.getValue(indicator.getTimeSeries().getEndIndex()), precision);
 
         indicator = getIndicator(xlsClose, 13);
-        assertIndicatorEquals(xls.getIndicator(13), indicator);
-        assertNumEquals("52.58768185890309760191197582379221951878504634897434288638106563", indicator.getValue(indicator.getTimeSeries().getEndIndex()));
+        assertIndicatorMatches(xls.getIndicator(13), indicator, precision);
+        assertNumMatches("52.58768185890309760191197582379221951878504634897434288638106563", indicator.getValue(indicator.getTimeSeries().getEndIndex()), precision);
     }
 
     @Test

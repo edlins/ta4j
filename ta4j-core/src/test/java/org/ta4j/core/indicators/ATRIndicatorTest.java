@@ -31,7 +31,7 @@ import java.time.ZonedDateTime;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
-import static org.ta4j.core.TestUtils.assertIndicatorEquals;
+import static org.ta4j.core.TestUtils.assertIndicatorMatches;
 
 public class ATRIndicatorTest extends AbstractIndicatorTest<TimeSeries, Num> {
 
@@ -68,17 +68,18 @@ public class ATRIndicatorTest extends AbstractIndicatorTest<TimeSeries, Num> {
     public void testXls() throws Exception {
         TimeSeries xlsSeries = xls.getSeries();
         Indicator<Num> indicator;
+        int precision = 12;
 
         indicator = getIndicator(xlsSeries, 1);
-        assertIndicatorEquals(xls.getIndicator(1), indicator);
+        assertIndicatorMatches(xls.getIndicator(1), indicator, precision);
         assertEquals(4.8, indicator.getValue(indicator.getTimeSeries().getEndIndex()).doubleValue(), TestUtils.GENERAL_OFFSET);
 
         indicator = getIndicator(xlsSeries, 3);
-        assertIndicatorEquals(xls.getIndicator(3), indicator);
+        assertIndicatorMatches(xls.getIndicator(3), indicator, precision);
         assertEquals(7.4225, indicator.getValue(indicator.getTimeSeries().getEndIndex()).doubleValue(), TestUtils.GENERAL_OFFSET);
 
         indicator = getIndicator(xlsSeries, 13);
-        assertIndicatorEquals(xls.getIndicator(13), indicator);
+        assertIndicatorMatches(xls.getIndicator(13), indicator, precision);
         assertEquals(8.8082, indicator.getValue(indicator.getTimeSeries().getEndIndex()).doubleValue(), TestUtils.GENERAL_OFFSET);
     }
 

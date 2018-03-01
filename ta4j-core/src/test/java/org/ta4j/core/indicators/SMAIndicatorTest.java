@@ -35,8 +35,8 @@ import org.ta4j.core.num.Num;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
-import static org.ta4j.core.TestUtils.assertIndicatorEquals;
-import static org.ta4j.core.TestUtils.assertNumEquals;
+import static org.ta4j.core.TestUtils.assertIndicatorMatches;
+import static org.ta4j.core.TestUtils.assertNumMatches;
 
 public class SMAIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num> {
 
@@ -69,19 +69,19 @@ public class SMAIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
     public void usingTimeFrame3UsingClosePrice(Num delta) {
         Indicator<Num> indicator = getIndicator(new ClosePriceIndicator(data), 3);
 
-        assertNumEquals("1", indicator.getValue(0), delta);
-        assertNumEquals("1.5", indicator.getValue(1), delta);
-        assertNumEquals("2", indicator.getValue(2), delta);
-        assertNumEquals("3", indicator.getValue(3), delta);
-        assertNumEquals("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(4), delta);
-        assertNumEquals("3.666666666666666666666666666666666666666666666666666666666666667", indicator.getValue(5), delta);
-        assertNumEquals("4", indicator.getValue(6), delta);
-        assertNumEquals("4.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(7), delta);
-        assertNumEquals("4", indicator.getValue(8), delta);
-        assertNumEquals("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(9), delta);
-        assertNumEquals("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(10), delta);
-        assertNumEquals("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(11), delta);
-        assertNumEquals("3", indicator.getValue(12), delta);
+        assertNumMatches("1", indicator.getValue(0), delta);
+        assertNumMatches("1.5", indicator.getValue(1), delta);
+        assertNumMatches("2", indicator.getValue(2), delta);
+        assertNumMatches("3", indicator.getValue(3), delta);
+        assertNumMatches("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(4), delta);
+        assertNumMatches("3.666666666666666666666666666666666666666666666666666666666666667", indicator.getValue(5), delta);
+        assertNumMatches("4", indicator.getValue(6), delta);
+        assertNumMatches("4.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(7), delta);
+        assertNumMatches("4", indicator.getValue(8), delta);
+        assertNumMatches("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(9), delta);
+        assertNumMatches("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(10), delta);
+        assertNumMatches("3.333333333333333333333333333333333333333333333333333333333333333", indicator.getValue(11), delta);
+        assertNumMatches("3", indicator.getValue(12), delta);
     }
 
     @Test
@@ -107,16 +107,33 @@ public class SMAIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
         Indicator<Num> actualIndicator;
 
         actualIndicator = getIndicator(xlsClose, 1);
-        assertIndicatorEquals(xls.getIndicator(1), actualIndicator, delta);
-        assertNumEquals("329", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+        assertIndicatorMatches(xls.getIndicator(1), actualIndicator, delta);
+        assertNumMatches("329", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
 
         actualIndicator = getIndicator(xlsClose, 3);
-        assertIndicatorEquals(xls.getIndicator(3), actualIndicator, delta);
-        assertNumEquals("326.6333333333333333333333333333333333333333333333333333333333333", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+        assertIndicatorMatches(xls.getIndicator(3), actualIndicator, delta);
+        assertNumMatches("326.6333333333333333333333333333333333333333333333333333333333333", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
 
         actualIndicator = getIndicator(xlsClose, 13);
-        assertIndicatorEquals(xls.getIndicator(13), actualIndicator, delta);
-        assertNumEquals("327.7846153846153846153846153846153846153846153846153846153846154", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+        assertIndicatorMatches(xls.getIndicator(13), actualIndicator, delta);
+        assertNumMatches("327.7846153846153846153846153846153846153846153846153846153846154", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+    }
+
+    public void externalDataPrecision(Num delta) throws Exception {
+        Indicator<Num> xlsClose = new ClosePriceIndicator(xls.getSeries());
+        Indicator<Num> actualIndicator;
+
+        actualIndicator = getIndicator(xlsClose, 1);
+        assertIndicatorMatches(xls.getIndicator(1), actualIndicator, delta);
+        assertNumMatches("329", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+
+        actualIndicator = getIndicator(xlsClose, 3);
+        assertIndicatorMatches(xls.getIndicator(3), actualIndicator, delta);
+        assertNumMatches("326.6333333333333333333333333333333333333333333333333333333333333", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
+
+        actualIndicator = getIndicator(xlsClose, 13);
+        assertIndicatorMatches(xls.getIndicator(13), actualIndicator, delta);
+        assertNumMatches("327.7846153846153846153846153846153846153846153846153846153846154", actualIndicator.getValue(actualIndicator.getTimeSeries().getEndIndex()), delta);
     }
 
 }

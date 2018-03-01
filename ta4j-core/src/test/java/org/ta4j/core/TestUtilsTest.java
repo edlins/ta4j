@@ -8,10 +8,10 @@ import org.ta4j.core.mocks.MockIndicator;
 import org.ta4j.core.num.BigDecimalNum;
 import org.ta4j.core.num.Num;
 
-import static org.ta4j.core.TestUtils.assertNumEquals;
-import static org.ta4j.core.TestUtils.assertNumNotEquals;
-import static org.ta4j.core.TestUtils.assertIndicatorEquals;
-import static org.ta4j.core.TestUtils.assertIndicatorNotEquals;
+import static org.ta4j.core.TestUtils.assertNumMatches;
+import static org.ta4j.core.TestUtils.assertNumNotMatches;
+import static org.ta4j.core.TestUtils.assertIndicatorMatches;
+import static org.ta4j.core.TestUtils.assertIndicatorNotMatches;
 
 public class TestUtilsTest extends AbstractIndicatorTest {
 
@@ -30,17 +30,17 @@ public class TestUtilsTest extends AbstractIndicatorTest {
     }
 
     public void stringNum(Num delta) {
-        assertNumEquals("0.1234", numOf(0.123456789), delta);
-        assertNumNotEquals("0.123", numOf(0.123456789), delta);
-        assertNumEquals("0.123456789", numOf(0.1234), delta);
-        assertNumNotEquals("0.123456789", numOf(0.123), delta);
-        assertNumEquals("0.123456789", numOf(0.123456789), delta);
-        assertNumEquals("0.12345678", numOf(0.123456789), delta);
-        assertNumEquals("0.12345", numOf(0.123456789), delta);
-        assertNumEquals("0.12345", numOf(0.12344), delta);
-        assertNumNotEquals("0.12345", numOf(0.123), delta);
-        assertNumEquals("0.12344", numOf(0.12345), delta);
-        assertNumNotEquals("0.123", numOf(0.12345), delta);
+        assertNumMatches("0.1234", numOf(0.123456789), delta);
+        assertNumNotMatches("0.123", numOf(0.123456789), delta);
+        assertNumMatches("0.123456789", numOf(0.1234), delta);
+        assertNumNotMatches("0.123456789", numOf(0.123), delta);
+        assertNumMatches("0.123456789", numOf(0.123456789), delta);
+        assertNumMatches("0.12345678", numOf(0.123456789), delta);
+        assertNumMatches("0.12345", numOf(0.123456789), delta);
+        assertNumMatches("0.12345", numOf(0.12344), delta);
+        assertNumNotMatches("0.12345", numOf(0.123), delta);
+        assertNumMatches("0.12344", numOf(0.12345), delta);
+        assertNumNotMatches("0.123", numOf(0.12345), delta);
     }
 
     @Test
@@ -54,17 +54,17 @@ public class TestUtilsTest extends AbstractIndicatorTest {
     }
 
     public void doubleNum(Num delta) {
-        assertNumEquals(0.1234, numOf(0.123456789), delta);
-        assertNumNotEquals(0.123, numOf(0.123456789), delta);
-        assertNumEquals(0.123456789, numOf(0.1234), delta);
-        assertNumNotEquals(0.123456789, numOf(0.123), delta);
-        assertNumEquals(0.123456789, numOf(0.123456789), delta);
-        assertNumEquals(0.12345678, numOf(0.123456789), delta);
-        assertNumEquals(0.12345, numOf(0.123456789), delta);
-        assertNumEquals(0.12345, numOf(0.12344), delta);
-        assertNumNotEquals(0.12345, numOf(0.123), delta);
-        assertNumEquals(0.12344, numOf(0.12345), delta);
-        assertNumNotEquals(0.123, numOf(0.12345), delta);
+        assertNumMatches(0.1234, numOf(0.123456789), delta);
+        assertNumNotMatches(0.123, numOf(0.123456789), delta);
+        assertNumMatches(0.123456789, numOf(0.1234), delta);
+        assertNumNotMatches(0.123456789, numOf(0.123), delta);
+        assertNumMatches(0.123456789, numOf(0.123456789), delta);
+        assertNumMatches(0.12345678, numOf(0.123456789), delta);
+        assertNumMatches(0.12345, numOf(0.123456789), delta);
+        assertNumMatches(0.12345, numOf(0.12344), delta);
+        assertNumNotMatches(0.12345, numOf(0.123), delta);
+        assertNumMatches(0.12344, numOf(0.12345), delta);
+        assertNumNotMatches(0.123, numOf(0.12345), delta);
     }
 
     @Test
@@ -78,17 +78,17 @@ public class TestUtilsTest extends AbstractIndicatorTest {
     }
 
     public void numNum(Num delta) {
-        assertNumEquals(numOf(0.1234), numOf(0.123456789), delta);
-        assertNumNotEquals(numOf(0.123), numOf(0.123456789), delta);
-        assertNumEquals(numOf(0.123456789), numOf(0.1234), delta);
-        assertNumNotEquals(numOf(0.123456789), numOf(0.123), delta);
-        assertNumEquals(numOf(0.123456789), numOf(0.123456789), delta);
-        assertNumEquals(numOf(0.12345678), numOf(0.123456789), delta);
-        assertNumEquals(numOf(0.12345), numOf(0.123456789), delta);
-        assertNumEquals(numOf(0.12345), numOf(0.12344), delta);
-        assertNumNotEquals(numOf(0.12345), numOf(0.123), delta);
-        assertNumEquals(numOf(0.12344), numOf(0.12345), delta);
-        assertNumNotEquals(numOf(0.123), numOf(0.12345), delta);
+        assertNumMatches(numOf(0.1234), numOf(0.123456789), delta);
+        assertNumNotMatches(numOf(0.123), numOf(0.123456789), delta);
+        assertNumMatches(numOf(0.123456789), numOf(0.1234), delta);
+        assertNumNotMatches(numOf(0.123456789), numOf(0.123), delta);
+        assertNumMatches(numOf(0.123456789), numOf(0.123456789), delta);
+        assertNumMatches(numOf(0.12345678), numOf(0.123456789), delta);
+        assertNumMatches(numOf(0.12345), numOf(0.123456789), delta);
+        assertNumMatches(numOf(0.12345), numOf(0.12344), delta);
+        assertNumNotMatches(numOf(0.12345), numOf(0.123), delta);
+        assertNumMatches(numOf(0.12344), numOf(0.12345), delta);
+        assertNumNotMatches(numOf(0.123), numOf(0.12345), delta);
     }
 
     @Test
@@ -102,47 +102,47 @@ public class TestUtilsTest extends AbstractIndicatorTest {
     }
 
     public void indicatorIndicator(Num delta) {
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.1234)),
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 delta);
-        assertIndicatorNotEquals(
+        assertIndicatorNotMatches(
                 new MockIndicator(numFunction, numOf(0.123)),
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 new MockIndicator(numFunction, numOf(0.1234)),
                 delta);
-        assertIndicatorNotEquals(
+        assertIndicatorNotMatches(
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 new MockIndicator(numFunction, numOf(0.123)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.12345678)),
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.12345)),
                 new MockIndicator(numFunction, numOf(0.123456789)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.12345)),
                 new MockIndicator(numFunction, numOf(0.12344)),
                 delta);
-        assertIndicatorNotEquals(
+        assertIndicatorNotMatches(
                 new MockIndicator(numFunction, numOf(0.12345)),
                 new MockIndicator(numFunction, numOf(0.123)),
                 delta);
-        assertIndicatorEquals(
+        assertIndicatorMatches(
                 new MockIndicator(numFunction, numOf(0.12344)),
                 new MockIndicator(numFunction, numOf(0.12345)),
                 delta);
-        assertIndicatorNotEquals(
+        assertIndicatorNotMatches(
                 new MockIndicator(numFunction, numOf(0.123)),
                 new MockIndicator(numFunction, numOf(0.12345)),
                 delta);
